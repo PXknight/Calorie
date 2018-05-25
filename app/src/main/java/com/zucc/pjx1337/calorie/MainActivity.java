@@ -121,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
         if(fragments[index].isAdded()==false)
         {
             transaction.add(R.id.main_layout,fragments[index]);
-
-
         }
         transaction.show(fragments[index]).commitAllowingStateLoss();
 

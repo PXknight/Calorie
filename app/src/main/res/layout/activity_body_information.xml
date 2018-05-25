@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".BodyInformationActivity">
+
+    <LinearLayout
+        android:id="@+id/body_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/sex_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="性别"
+                android:maxLines="1"
+                android:textColor="@color/White"
+                android:singleLine="true"
+                android:maxLength="10" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/age_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="年龄"
+                android:maxLines="1"
+                android:textColor="@color/White"
+                android:singleLine="true"
+                android:maxLength="10" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/height_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="身高"
+                android:maxLines="1"
+                android:textColor="@color/White"
+                android:singleLine="true"
+                android:maxLength="10" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/weight_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="体重"
+                android:maxLines="1"
+                android:textColor="@color/White"
+                android:singleLine="true"
+                android:maxLength="10" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/sportsNums_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="每周七天运动几天？"
+                android:maxLines="1"
+                android:textColor="@color/White"
+                android:singleLine="true"
+                android:maxLength="10" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/sure_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="确定"
+            android:textStyle="bold"
+            android:textColor="@color/White"
+            android:background="@color/colorPrimaryDark" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
