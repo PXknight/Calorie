@@ -64,20 +64,8 @@ public class RegisterActivity extends BaseActivity {
         if(userEdit.getText().toString().length()<1){
             toast("用户名不能为空");
             return;
-        } else{
-            BmobQuery<User> query = new BmobQuery<User>();
-            query.addWhereEqualTo("username", userEdit.getText().toString());
-            query.findObjects(new FindListener<User>() {
-                @Override
-                public void done(List<User> object, BmobException e) {
-                    if(e==null){
-                        toast("该用户已存在");
-                    }else{
-                        return;
-                    }
-                }
-            });
         }
+
         if(passwordEdit.getText().toString().length()<1){
             toast("密码不能为空");
             return;
@@ -100,6 +88,7 @@ public class RegisterActivity extends BaseActivity {
                     toast("注册成功,请填写个人资料");
                     finish();
                 }else{
+                    toast("该用户已存在");
                     loge(e);
                 }
             }

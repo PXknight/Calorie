@@ -4,12 +4,22 @@ import cn.bmob.v3.BmobUser;
 
 public class User extends BmobUser {
 
-    Boolean sex;
+    String sex;
     Integer age;
     Integer height;
     Float weight;
     Integer SportsNum;
     Integer bmr;
+    Integer bmr2;
+    public Integer getBmr2() {
+        return bmr2;
+    }
+
+    public void setBmr2(Integer bmr2) {
+        this.bmr2 = bmr2;
+    }
+
+
 
     public Integer getBmr() {
         return bmr;
@@ -21,11 +31,11 @@ public class User extends BmobUser {
 
 
 
-    public Boolean getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
