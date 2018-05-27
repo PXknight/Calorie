@@ -3,33 +3,32 @@ package com.zucc.pjx1337.calorie;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
-import android.widget.TextView;
+import android.view.MotionEvent;
+import android.view.View;
 
-import com.zucc.pjx1337.calorie.fragment.HomeFragment;
-import com.zucc.pjx1337.calorie.fragment.SettingFragment;
-import com.zucc.pjx1337.calorie.fragment.ShareFragment;
-import com.zucc.pjx1337.calorie.fragment.SportsFragment;
+import com.zucc.pjx1337.calorie.Adapter.ViewPagerAdapter;
+import com.zucc.pjx1337.calorie.Home.HomeFragment;
+import com.zucc.pjx1337.calorie.Setting.SettingFragment;
+import com.zucc.pjx1337.calorie.Share.ShareFragment;
+import com.zucc.pjx1337.calorie.Sports.SportsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-    @BindView(R.id.main_layout)FrameLayout mainframeLayout;
-    @BindView(R.id.navigation)BottomNavigationView navigation;
-    private int lastFragmentNum;
+    @BindView(R.id.navigation)BottomNavigationView bottomNavigationView;
+    @BindView(R.id.viewpager)ViewPager viewPager;
     private HomeFragment homeFragment;
     private ShareFragment shareFragment;
     private SportsFragment sportsFragment;
     private SettingFragment settingFragment;
-    private Fragment[] fragments;
+    MenuItem prevMenuItem;
+
 
 
     @Override
@@ -37,26 +36,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        BottomNavigationViewHelper.disableShiftMode(navigation);
-        initFragment();
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+        viewPager.addOnPageChangeListener(mOnOnPageChangeListener);
+
+         //取消ViewPager滑动
+       viewPager.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                return true;
+            }
+        });
+
+
+
+        setupViewPager(viewPager);
+
 
     }
 
-
-    //初始化fragment
-    private void initFragment(){
-        homeFragment = new HomeFragment();
-        shareFragment = new ShareFragment();
-        sportsFragment = new SportsFragment();
-        settingFragment = new SettingFragment();
-        fragments = new Fragment[]{homeFragment,shareFragment,sportsFragment,settingFragment};
-        lastFragmentNum=0;
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main_layout,homeFragment).show(homeFragment).commit();
-    }
-
+    //底部导航栏监听
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -64,67 +65,64 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                {
-                    if(lastFragmentNum!=0)
-                    {
-                        switchFragment(lastFragmentNum,0);
-                        lastFragmentNum=0;
-
-                    }
-
+                    viewPager.setCurrentItem(0);
                     return true;
-                }
                 case R.id.navigation_share:
-                {
-                    if(lastFragmentNum!=1)
-                    {
-                        switchFragment(lastFragmentNum,1);
-                        lastFragmentNum=1;
-
-                    }
-
+                    viewPager.setCurrentItem(1);
                     return true;
-                }
-
                 case R.id.navigation_sports:
-                {
-                    if(lastFragmentNum!=2)
-                    {
-                        switchFragment(lastFragmentNum,2);
-                        lastFragmentNum=2;
-
-                    }
-
+                    viewPager.setCurrentItem(2);
                     return true;
-                }
                 case R.id.navigation_setting:
-                {
-                    if(lastFragmentNum!=3)
-                    {
-                        switchFragment(lastFragmentNum,3);
-                        lastFragmentNum=3;
-
-                    }
-
+                    viewPager.setCurrentItem(3);
                     return true;
-                }
             }
             return false;
         }
     };
 
-    //切换Fragment
-    private void switchFragment(int lastfragment,int index)
-    {
-        FragmentTransaction transaction =getSupportFragmentManager().beginTransaction();
-        transaction.hide(fragments[lastfragment]);//隐藏上个Fragment
-        if(fragments[index].isAdded()==false)
-        {
-            transaction.add(R.id.main_layout,fragments[index]);
+    //Pager改变监听
+    private ViewPager.OnPageChangeListener mOnOnPageChangeListener
+            = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
         }
-        transaction.show(fragments[index]).commitAllowingStateLoss();
+
+        @Override
+        public void onPageSelected(int position) {
+            if (prevMenuItem != null) {
+                prevMenuItem.setChecked(false);
+            }
+            else
+            {
+                bottomNavigationView.getMenu().getItem(0).setChecked(false);
+            }
+            Log.d("page", "onPageSelected: "+position);
+            bottomNavigationView.getMenu().getItem(position).setChecked(true);
+            prevMenuItem = bottomNavigationView.getMenu().getItem(position);
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 
 
+    //加载ViewPager
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        homeFragment=new HomeFragment();
+        shareFragment=new ShareFragment();
+        sportsFragment=new SportsFragment();
+        settingFragment = new SettingFragment();
+        adapter.addFragment(homeFragment);
+        adapter.addFragment(shareFragment);
+        adapter.addFragment(sportsFragment);
+        adapter.addFragment(settingFragment);
+        viewPager.setAdapter(adapter);
     }
 
 }

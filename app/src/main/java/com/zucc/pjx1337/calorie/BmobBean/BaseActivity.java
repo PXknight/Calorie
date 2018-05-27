@@ -1,4 +1,4 @@
-package com.zucc.pjx1337.calorie;
+package com.zucc.pjx1337.calorie.BmobBean;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,8 +16,6 @@ import rx.subscriptions.CompositeSubscription;
 public class BaseActivity extends AppCompatActivity {
 	
 	public static String TAG = "bmob";
-	protected ListView mListview;
-	protected BaseAdapter mAdapter;
 
 	private CompositeSubscription mCompositeSubscription;
 

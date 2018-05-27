@@ -29,10 +29,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,9 +37,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+        <activity
             android:name=".RegisterActivity"
             android:label="注册" />
-        <activity android:name=".BodyInformationActivity"></activity>
+        <activity android:name=".BodyInformationActivity" />
+        <activity android:name=".Share.AddShareActivity"></activity>
     </application>
 
 </manifest>

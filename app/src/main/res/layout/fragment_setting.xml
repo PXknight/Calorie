@@ -3,12 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.SettingFragment">
+    tools:context=".Setting.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="4" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/label_bg_single_layout">
+
+                <TextView
+                    android:id="@+id/setting"
+                    style="@style/set_left_text"
+                    android:text="个人资料设置" />
+
+                <ImageView
+                    style="@style/set_image"
+                    android:src="@drawable/setting_arrow" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/label_bg_single_layout"
+                android:id="@+id/accout_set">
+
+                <TextView
+                    style="@style/set_left_text"
+                    android:text="账号管理" />
+
+                <ImageView
+                    style="@style/set_image"
+                    android:src="@drawable/setting_arrow" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/label_bg_single_layout">
+
+                <TextView
+                    style="@style/set_left_text"
+                    android:text="关于Calorie " />
+
+                <ImageView
+                    style="@style/set_image"
+                    android:src="@drawable/setting_arrow" />
+            </LinearLayout>
+
+
+            <LinearLayout style="@style/label_bg_single_layout">
+
+                <TextView
+                    style="@style/set_left_text"
+                    android:text="退出登录" />
+
+                <ImageView
+                    style="@style/set_image"
+                    android:src="@drawable/setting_arrow" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
